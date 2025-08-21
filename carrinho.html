@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - StreetStyle</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-img"> <img src="img/logo.png" alt="Logo StreetStyle">
+            </a>
+            <div class="nav-wrapper"> <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="index.html#contato">Contato</a></li>
+                        <li>
+                            <a href="carrinho.html" class="cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-btn" aria-label="Abrir menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="catalogo.html">Catálogo</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="index.html#contato">Contato</a></li> <li>
+                <a href="carrinho.html">
+                    Carrinho (<span class="cart-count-mobile">0</span>)
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <main class="cart-page-content"> <h2 class="section-title">Seu Carrinho de Compras</h2>
+
+        <section id="cart-content-section" class="cart-page" style="display: none;"> <div class="cart-container">
+                <div class="cart-items" id="cart-items-container">
+                    </div>
+                <div class="cart-summary">
+                    <h3 class="summary-title">Resumo do Pedido</h3>
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Frete:</span>
+                        <span id="cart-shipping">R$ 0,00</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="cart-total">R$ 0,00</span>
+                    </div>
+                    <button class="btn checkout-btn" id="checkout-whatsapp-btn">Finalizar Pedido no WhatsApp</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="empty-cart-section" class="cart-page-empty" style="display: none;"> <div class="empty-cart-message-content">
+                <i class="fas fa-shopping-cart" style="font-size: 3rem; color: var(--gray); margin-bottom: 1rem;"></i>
+                <h2>Seu carrinho está vazio!</h2>
+                <p>Parece que você ainda não adicionou nenhum item. Que tal dar uma olhada em nossos produtos incríveis?</p>
+                <a href="catalogo.html" class="btn">Ver Produtos</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>StreetStyle</h3>
+                <ul>
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Serviço</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Categorias</h3>
+                <ul>
+                    <li><a href="catalogo.html">Camisetas Oversized</a></li>
+                    <li><a href="catalogo.html">Camisetas Gráficas</a></li>
+                    <li><a href="catalogo.html">Coleções Cápsula</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Minha Conta</h3>
+                <ul>
+                    <li><a href="carrinho.html">Ver Carrinho</a></li>
+                    <li><a href="#">Minha Lista de Desejos</a></li>
+                    <li><a href="#">Rastrear Pedido</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 StreetStyle. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/cart.js"></script> </body>
+</html>

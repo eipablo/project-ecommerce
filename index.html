@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo - Moda Urbana Autêntica</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-img"> <img src="img/logo.png" alt="Logo StreetStyle">
+            </a>
+            <div class="nav-wrapper"> <nav>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="sobre.html">Sobre</a></li>
+                        <li><a href="index.html#contato">Contato</a></li>
+                        <li>
+                            <a href="carrinho.html" class="cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-btn" aria-label="Abrir menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="catalogo.html">Catálogo</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li>
+                <a href="carrinho.html">
+                    Carrinho (<span class="cart-count-mobile">0</span>)
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <main>
+        <section class="hero">
+            <h1>Lorem ipsum dolor sit.</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, dignissimos.</p>
+            <a href="catalogo.html" class="btn">Explorar Coleção</a>
+        </section>
+
+        <section class="featured">
+            <h2 class="section-title">Nossas Camisetas: </h2>
+            <div class="products-grid" id="featured-products-grid">
+                </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="catalogo.html" class="btn">Ver Todos os Produtos</a>
+            </div>
+        </section>
+
+        <section id="contato" class="contact-page">
+            <h2 class="section-title">Fale Conosco</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Informações de Contato</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <span>Alguma rua de algum lugar, Algum número, Algum Bairro, Campinas - SP</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <span>(19) 99999-9999</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <span>contato@algumEmail.com.br</span>
+                        </div>
+                    </div>
+                    <h2>Siga-nos</h2>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h2>Envie-nos uma Mensagem</h2>
+                    <form action="#" method="POST" class="form">
+                        <input type="text" name="name" placeholder="Seu Nome" required>
+                        <input type="email" name="email" placeholder="Seu E-mail" required>
+                        <input type="text" name="subject" placeholder="Assunto">
+                        <textarea name="message" placeholder="Sua Mensagem" required></textarea>
+                
+                        <div style="position: absolute; left: -9999px;">
+                            <input type="text" name="hp_field" tabindex="-1" autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                        <div id="form-feedback" style="margin-top:1rem;"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>StreetStyle</h3>
+                <ul>
+                    <li><a href="sobre.html">Sobre Nós</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Serviço</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Categorias</h3>
+                <ul>
+                    <li><a href="catalogo.html">Camisetas Oversized</a></li>
+                    <li><a href="catalogo.html">Camisetas Gráficas</a></li>
+                    <li><a href="catalogo.html">Coleções Cápsula</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Minha Conta</h3>
+                <ul>
+                    <li><a href="carrinho.html">Ver Carrinho</a></li>
+                    <li><a href="https://transporte-enviosnetbr.com/pacote/" target="_blank">Rastrear Pedido</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 StreetStyle. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
