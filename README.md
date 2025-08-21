@@ -22,12 +22,6 @@ Projeto de loja online desenvolvido com HTML, CSS e JavaScript. Inclui funcional
 - CSS3
 - JavaScript
 
-## Funcionalidades futuras
-
-- Cadastro de usuários
-- Histórico de pedidos
-- Integração com meios de pagamento
-
 ## Acesse o projeto
 
 [🔗 Projeto Online](https://project-ecommerce-theta.vercel.app)
