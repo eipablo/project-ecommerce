@@ -12,7 +12,7 @@ Projeto de loja online desenvolvido com HTML, CSS e JavaScript. Inclui funcional
 
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/seu-usuario/project-ecommerce.git
+    git clone https://github.com/eipablo/project-ecommerce.git
     ```
 2. Abra o arquivo `index.html` no navegador.
 
