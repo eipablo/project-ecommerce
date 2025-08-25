@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Dados de produtos (simulando um "banco de dados") ---
+
+    // --- Dados de produtos ---
     const products = [
         {
             id: '1',
@@ -81,13 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // --- Funções de Ajuda ---
-
     function formatPrice(price) {
         return price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
 
     // --- Carrinho de Compras ---
-
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function updateCartCount() {
@@ -104,9 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function addToCart(productId, selectedSize, quantity) {
         const product = products.find(p => p.id === productId);
         if (!product) return;
-
         const existingItemIndex = cart.findIndex(item => item.id === productId && item.size === selectedSize);
-
         if (existingItemIndex > -1) {
             cart[existingItemIndex].quantity += quantity;
         } else {
@@ -125,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function removeFromCart(productId, size) {
         cart = cart.filter(item => !(item.id === productId && item.size === size));
         saveCart();
-        renderCartPage(); // Atualiza a página do carrinho se estiver nela
+        renderCartPage();
     }
 
     function updateCartItemQuantity(productId, size, newQuantity) {
@@ -141,12 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Renderização de Produtos ---
-
     function renderProductCard(product) {
         const priceHtml = product.oldPrice ?
             `<span class="old-price">${formatPrice(product.oldPrice)}</span><span class="new-price">${formatPrice(product.price)}</span>` :
             `<span class="new-price">${formatPrice(product.price)}</span>`;
-
         return `
             <div class="product-card">
                 ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
@@ -165,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderFeaturedProducts() {
         const featuredProductsGrid = document.getElementById('featured-products-grid');
         if (featuredProductsGrid) {
-            const featured = products.slice(0, 3); // Exibe os 3 primeiros como destaque
+            const featured = products.slice(0, 3);
             featuredProductsGrid.innerHTML = featured.map(renderProductCard).join('');
         }
     }
@@ -178,14 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Páginas Específicas ---
-
     function renderProductPage() {
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
         const product = products.find(p => p.id === productId);
 
         if (!product) {
-            // Redireciona para o catálogo ou exibe uma mensagem de erro
             window.location.href = 'catalogo.html';
             return;
         }
@@ -197,14 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('product-price').textContent = formatPrice(product.price);
         document.getElementById('product-description').textContent = product.description;
 
-        // Renderizar miniaturas
         const thumbnailContainer = document.getElementById('thumbnail-container');
-        if (thumbnailContainer) { // Adicionado verificação para garantir que o elemento exista
+        if (thumbnailContainer) {
             thumbnailContainer.innerHTML = product.images.map(imgSrc => `
                 <img src="${imgSrc}" alt="Miniatura do Produto" class="thumbnail" data-full-image="${imgSrc}">
             `).join('');
-
-            // Lógica de troca de imagem ao clicar na miniatura
             thumbnailContainer.querySelectorAll('.thumbnail').forEach(thumbnail => {
                 thumbnail.addEventListener('click', () => {
                     document.getElementById('main-product-image').src = thumbnail.dataset.fullImage;
@@ -212,14 +202,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-
-        // Renderizar opções de tamanho
         const sizeOptionsContainer = document.getElementById('size-options-container');
-        if (sizeOptionsContainer) { // Adicionado verificação
+        if (sizeOptionsContainer) {
             sizeOptionsContainer.innerHTML = product.sizes.map(size => `
                 <span class="size-option" data-size="${size}">${size}</span>
             `).join('');
-
             let selectedSize = null;
             sizeOptionsContainer.querySelectorAll('.size-option').forEach(option => {
                 option.addEventListener('click', () => {
@@ -229,21 +216,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            // Lógica de quantidade
             const quantityInput = document.getElementById('product-quantity');
-            document.getElementById('decrease-quantity')?.addEventListener('click', () => { // Usando optional chaining
+            document.getElementById('decrease-quantity')?.addEventListener('click', () => {
                 let currentQuantity = parseInt(quantityInput.value);
                 if (currentQuantity > 1) {
                     quantityInput.value = currentQuantity - 1;
                 }
             });
-            document.getElementById('increase-quantity')?.addEventListener('click', () => { // Usando optional chaining
+            document.getElementById('increase-quantity')?.addEventListener('click', () => {
                 let currentQuantity = parseInt(quantityInput.value);
                 quantityInput.value = currentQuantity + 1;
             });
 
-            // Adicionar ao carrinho
-            document.getElementById('add-to-cart-btn')?.addEventListener('click', () => { // Usando optional chaining
+            document.getElementById('add-to-cart-btn')?.addEventListener('click', () => {
                 if (!selectedSize) {
                     alert('Por favor, selecione um tamanho!');
                     return;
@@ -251,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const quantity = parseInt(quantityInput.value);
                 addToCart(productId, selectedSize, quantity);
                 const messageEl = document.getElementById('add-to-cart-message');
-                if (messageEl) { // Adicionado verificação
+                if (messageEl) {
                     messageEl.textContent = `${quantity}x "${product.name}" (Tamanho: ${selectedSize}) adicionado ao carrinho!`;
                     messageEl.style.display = 'block';
                     setTimeout(() => {
@@ -262,23 +247,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-
-        // Zoom da imagem
         const mainImage = document.getElementById('main-product-image');
         const zoomOverlay = document.getElementById('zoom-overlay');
         const zoomedImage = document.getElementById('zoomed-image');
         const closeZoom = document.getElementById('close-zoom');
 
-        if (mainImage && zoomOverlay && zoomedImage && closeZoom) { // Adicionado verificação de todos os elementos
+        if (mainImage && zoomOverlay && zoomedImage && closeZoom) {
             mainImage.addEventListener('click', () => {
                 zoomedImage.src = mainImage.src;
                 zoomOverlay.classList.add('active');
             });
-
             closeZoom.addEventListener('click', () => {
                 zoomOverlay.classList.remove('active');
             });
-
             zoomOverlay.addEventListener('click', (e) => {
                 if (e.target === zoomOverlay) {
                     zoomOverlay.classList.remove('active');
@@ -296,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkoutBtn = document.getElementById('checkout-whatsapp-btn');
 
         if (!cartItemsContainer || !cartSubtotalEl || !cartShippingEl || !cartTotalEl || !emptyCartMessage || !checkoutBtn) {
-            // Garante que estamos na página do carrinho e todos os elementos existem
             return;
         }
 
@@ -340,7 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }).join('');
 
-        // Adicionar eventos para alterar quantidade e remover itens do carrinho
         cartItemsContainer.querySelectorAll('.decrease-cart-quantity').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const productId = e.target.closest('.quantity-selector').dataset.productId;
@@ -369,16 +348,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-
-        // Calcula frete (exemplo fixo, pode ser dinâmico)
-        const shipping = subtotal > 0 ? 20.00 : 0; // Exemplo: frete de R$20 se tiver algo no carrinho
+        const shipping = subtotal > 0 ? 20.00 : 0;
         const total = subtotal + shipping;
 
         cartSubtotalEl.textContent = formatPrice(subtotal);
         cartShippingEl.textContent = formatPrice(shipping);
         cartTotalEl.textContent = formatPrice(total);
 
-        // Lógica de finalizar pedido no WhatsApp
         checkoutBtn.addEventListener('click', () => {
             let message = "Olá! Gostaria de fazer um pedido na StreetStyle:\n\n";
             cart.forEach((item, index) => {
@@ -389,47 +365,40 @@ document.addEventListener('DOMContentLoaded', () => {
             message += `\nTotal: ${formatPrice(total)}`;
             message += `\n\nAguardamos seu contato para finalizar a compra!`;
 
-            const whatsappNumber = '5519994711585'; // Substitua pelo seu número de WhatsApp com DDI e DDD
+            const whatsappNumber = '5519994711585';
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`, '_blank');
 
-            // Limpa o carrinho após enviar para o WhatsApp
             cart = [];
             saveCart();
             setTimeout(() => {
                 window.location.href = 'obrigado.html';
-            }, 500); // Pequeno atraso para garantir o envio
+            }, 500);
         });
     }
 
-
     // --- Inicialização do Menu Mobile (Hambúrguer) ---
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu'); // Agora se refere à div .mobile-menu
+    const mobileMenu = document.querySelector('.mobile-menu');
 
     if (mobileMenuBtn && mobileMenu) {
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
-            // Opcional: Altera o ícone do botão (hambúrguer <-> X)
             const icon = mobileMenuBtn.querySelector('i');
             if (mobileMenu.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times'); // Ícone de 'X'
+                icon.classList.add('fa-times');
             } else {
                 icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars'); // Ícone de 'hambúrguer'
+                icon.classList.add('fa-bars');
             }
         });
     }
 
-    // Ocultar menu mobile ao clicar fora ou em um link
     document.addEventListener('click', (event) => {
-        // Verifica se o mobileMenu existe e está ativo antes de tentar fechar
         if (mobileMenu && mobileMenu.classList.contains('active')) {
-            // Se o clique não foi no botão e nem dentro do menu
             if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
                 mobileMenu.classList.remove('active');
-                // Restaura o ícone do hambúrguer
                 const icon = mobileMenuBtn.querySelector('i');
                 if (icon) {
                     icon.classList.remove('fa-times');
@@ -439,7 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    if (mobileMenu) { // Verifica se o mobileMenu existe antes de tentar selecionar links
+    if (mobileMenu) {
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
@@ -452,34 +421,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // --- Lógica de Animações ao Rolar a Página (Scroll Reveal) ---
-    // Seleciona todos os elementos que têm classes de animação
     const animatedElements = document.querySelectorAll('.fade-in, .slide-in-from-bottom, .slide-in-from-left, .slide-in-from-right, .scale-in-center');
-
     const observerOptions = {
-        root: null, // viewport
+        root: null,
         rootMargin: '0px',
-        threshold: 0.1 // 10% do elemento visível para ativar a animação
+        threshold: 0.1
     };
-
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Opcional: para animar apenas uma vez
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
-
-    // Observa cada elemento animado
     animatedElements.forEach(element => {
         observer.observe(element);
     });
 
-
     // --- Renderiza o conteúdo com base na página atual ---
-    updateCartCount(); // Atualiza a contagem do carrinho em todas as páginas
+    updateCartCount();
     const currentPage = window.location.pathname.split('/').pop();
 
     if (currentPage === 'index.html' || currentPage === '') {
@@ -493,17 +455,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/* --- Lógica do Formulário de Contato --- */
+// --- Lógica do Formulário de Contato ---
 const contactForm = document.querySelector('.form');
 if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
-
         const name = contactForm.querySelector('[name="name"]').value.trim();
         const email = contactForm.querySelector('[name="email"]').value.trim();
         const message = contactForm.querySelector('[name="message"]').value.trim();
         let feedback = document.getElementById('contact-form-feedback');
-        // Se não existir, cria dinamicamente após o formulário
         if (!feedback) {
             feedback = document.createElement('div');
             feedback.id = 'contact-form-feedback';
@@ -511,8 +471,6 @@ if (contactForm) {
             contactForm.appendChild(feedback);
         }
         feedback.style.display = 'block';
-
-        // Validação simples
         if (!name || !email || !message) {
             if (feedback) {
                 feedback.textContent = 'Por favor, preencha todos os campos.';
@@ -521,8 +479,6 @@ if (contactForm) {
             }
             return;
         }
-
-        
         setTimeout(() => {
             if (feedback) {
                 feedback.textContent = 'Mensagem enviada com sucesso! Obrigado pelo contato.';
